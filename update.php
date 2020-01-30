@@ -1,0 +1,77 @@
+<?php
+include_once 'config.php';
+
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    header("location: index.php");
+    exit;
+}
+
+if (isset($_SESSION['loggedin'])) {
+    if (@$_GET['page'] == 'addquiz') {
+        $id      = uniqid();
+        $owner   = $_SESSION["username"];
+        $name    = $_POST['name'];
+        $name    = ucwords(strtolower($name));
+        $total   = $_POST['total'];
+        $time    = $_POST['time'];
+
+        $q3      = mysqli_query($link, "INSERT INTO quiz VALUES (NULL,'$id','$owner','$name','$total','$time', null) ");
+        header("location:welcome.php?page=2&step=2&eid=$id&n=$total");
+    }
+}
+if (isset($_SESSION['loggedin'])) {
+    if (@$_GET['page'] == 'addqns') {
+        $n   = @$_GET['n'];
+        $eid = @$_GET['eid'];
+        $ch  = @$_GET['ch'];
+
+        for ($i = 1; $i <= $n; $i++) {
+            $qid  = uniqid();
+            $qns  = addslashes($_POST['qns' . $i]);
+            $q3   = mysqli_query($link, "INSERT INTO questions VALUES(NULL,'$eid','$qid','$qns','$ch','$i')") or die();
+            $oaid = uniqid();
+            $obid = uniqid();
+            $ocid = uniqid();
+            $odid = uniqid();
+            $a    = addslashes($_POST[$i . '1']);
+            $b    = addslashes($_POST[$i . '2']);
+            $c    = addslashes($_POST[$i . '3']);
+            $d    = addslashes($_POST[$i . '4']);
+            $qa = mysqli_query($link, "INSERT INTO options VALUES (NULL,'$qid','$a','$oaid')") or die('Error61');
+            $qb = mysqli_query($link, "INSERT INTO options VALUES (NULL,'$qid','$b','$obid')") or die('Error62');
+            $qb = mysqli_query($link, "INSERT INTO options VALUES (NULL,'$qid','$c','$ocid')") or die('Error63'.mysqli_error($link));
+            $qd = mysqli_query($link, "INSERT INTO options VALUES (NULL,'$qid','$d','$odid')") or die('Error64');
+            $e = $_POST['ans' . $i];
+
+            switch ($e) {
+                case 'a':
+                    $ansid = $oaid;
+                    break;
+                
+                case 'b':
+                    $ansid = $obid;
+                    break;
+                
+                case 'c':
+                    $ansid = $ocid;
+                    break;
+                
+                case 'd':
+                    $ansid = $odid;
+                    break;
+                
+                default:
+                    $ansid = $oaid;
+            }
+            
+            $qans = mysqli_query($link, "INSERT INTO answer VALUES(NULL,'$qid','$ansid')");
+
+        }
+        header("location:welcome.php?page=1");
+    }
+}
+?>

@@ -77,8 +77,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
+                // Show MODAL
+                echo '
+                    <div class="accountSuccessfulModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Registration</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Account Creation Successful.</p>
+                                    <p>Redirecting to login in <span id="countdowntimer">10</span> seconds. Otherwise, click <a href="index.php">here</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ';
                 // Redirect to login page
-                header("location: index.php");
+                echo '
+                    <meta http-equiv="refresh" content="10;url=index.php" />
+                ';
+                // header("location: index.php");
             } else {
                 echo "Something went wrong. Please try again later.";
             }
@@ -107,6 +126,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="css/signup.css">
+
+    <script>
+        // Creates and focuses the bootstrap modal
+        $(document).ready(function() {
+            $("#accountSuccessfulModal").modal('show');
+            $('#accountSuccessfulModal').focus()
+        });
+
+        // Countdown timer for redirect after account creation
+        var timeleft = 10;
+        var downloadTimer = setInterval(function(){
+        timeleft--;
+        document.getElementById("countdowntimer").textContent = timeleft;
+        if(timeleft <= 0)
+            clearInterval(downloadTimer);
+        },1000);
+    </script>
 </head>
 
 <body>
@@ -127,10 +163,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>" placeholder="Confirm Password" required>
                         <div class="badge"><?php echo $confirm_password_err; ?></div>
                     </div>
-                    <div class="form-group">
+                    <div class="align-center">
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <input type="reset" class="btn btn-default" value="Reset">
                     </div>
+                    <br>
                     <p>Already have an account? <a href="index.php">Login here</a>.</p>
                 </form>
             </div>

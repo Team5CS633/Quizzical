@@ -19,7 +19,8 @@
 <?php
 include_once 'config.php';
 
-if (@$_GET['page'] == 'quiz') {
+
+if (@$_GET['eid']) {
 
     $eid   = @$_GET['eid'];
 
@@ -35,8 +36,13 @@ if (@$_GET['page'] == 'quiz') {
             <br>
     ';
 
+}
+
+
+if (@$_GET['page'] == 'quiz' && !(@$_GET['step'])) {
+
     echo '
-            <form id="qform" action="update.php?page=quiz&step=2&eid=' . $eid . '&n=' . $sn . '&t=' . $total . '&qid=' . $qid . '" method="POST"  class="form-horizontal">
+            <form action="quiz.php?eid=' . $eid . '" method="POST">
     ';
 
     $q     = mysqli_query($link, "SELECT * FROM questions WHERE eid='$eid' ");
@@ -86,13 +92,48 @@ if (@$_GET['page'] == 'quiz') {
  
     echo '
             <div class="text-center">
-            <button type="submit" class="btn btn-default" disabled="true" id="sbutton" style="height:30px">
-                <font style="font-size:12px;font-weight:bold">Submit<font>
-            </button>
-            </form>
+                <input type="submit" value="Submit Quiz">
             </div>
+            </form>
         </div>
+    ';
 
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $eid = @$_GET['eid'];
+
+    /* store answers in an array for marking */
+    $answers = array();
+    $score = 0;
+    $index = 0;
+
+    /* select correct answers from db */
+    $questions = mysqli_query($link, "SELECT * FROM questions WHERE eid='$eid' ");
+
+    /* populate the answers array */
+    while ( $rs = mysqli_fetch_array($questions) ) {
+        $questionID = $rs['qid'];
+        $correctAnswer = mysqli_query($link, "SELECT * FROM answer WHERE qid='$questionID' ");
+        $rs2 = mysqli_fetch_array($correctAnswer);
+        $actualAnswer = $rs2['ansid'];
+        $answers[] =  $actualAnswer;
+    }
+
+    /* mark the answers */
+    foreach ( $_POST as $question => $answer ) {
+        echo $question . ' - ' . $answer . '<br><br>';
+        if ( $answer == $answers[$index] ) {
+            $score++;
+        }
+        $index++;
+    }
+
+    /* show score */
+    echo '
+        Your score is <b>'. $score . '</b> out of <b>' . $index . '</b>!
     ';
 
 }

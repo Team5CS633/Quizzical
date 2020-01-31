@@ -6,3 +6,22 @@ body {
     
     text-align:center;
 }
+
+.bloc {
+  
+  width: 100%;
+  vertical-align: top;
+  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  padding: 5px;
+}
+
+.bloc select {
+
+  width: 100%;
+  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  padding: 5px;
+}

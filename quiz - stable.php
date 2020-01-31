@@ -11,8 +11,6 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="css/quiz.css">
-
 </head>
 <body>
 
@@ -41,8 +39,6 @@ if (@$_GET['page'] == 'quiz') {
 
     $q     = mysqli_query($link, "SELECT * FROM questions WHERE eid='$eid' ");
 
-    $radioCounter = 1;
-
     while ($row = mysqli_fetch_array($q)) {
         $qns = stripslashes($row['qns']);
         $qid = $row['qid'];
@@ -53,35 +49,34 @@ if (@$_GET['page'] == 'quiz') {
                 <div class="card-header">Question ' . $sn . ' - ' . $qns . '
                 </div>
                 <div class="card-body">
-                    <div class="bloc">
-                        <select name="ans' . $radioCounter . '" size="4">
+                    <div class="funkyradio">
         ';
 
         $k = mysqli_query($link, "SELECT * FROM options WHERE qid='$qid' ");
+
+        $radioCounter = 1;
 
         while ($row = mysqli_fetch_array($k)) {
             $option   = stripslashes($row['option']);
             $optionid = $row['optionid'];
 
             echo '
-                        
-                            <option id="' . $optionid . '" value="' . $optionid . '">
+                        <div class="funkyradio-success">
+                            <input type="radio" id="' . $optionid . '" name="ans" value="' . $optionid . '" onclick="enable()">
                             <label for="' . $optionid . '" style="width:50%">' . $option . '</label>
-                        
+                        </div>
             ';
 
+            $radioCounter++;
         }
 
         echo '
-                        </select>
                     </div>
                 </div>
             </div>
             <br>
         ';
         
-        $radioCounter++;
-
     }
  
     echo '

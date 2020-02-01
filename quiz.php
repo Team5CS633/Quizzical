@@ -61,7 +61,7 @@ if (@$_GET['page'] == 'quiz' && !(@$_GET['step'])) {
                 <div class="card-body">
                     <div class="bloc">
                         <select name="ans' . $radioCounter . '" size="4">
-                        <option value="none" selected disabled hidden>
+                            <option id="none" value="none" selected hidden>
         ';
 
         $k = mysqli_query($link, "SELECT * FROM options WHERE qid='$qid' ");

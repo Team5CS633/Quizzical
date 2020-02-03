@@ -24,44 +24,53 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/main.css">
+
 </head>
 
 <body>
-    <div class="d-flex" id="wrapper">
 
-        <!-- Sidebar -->
-        <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading"><img src="img/Qlogo.png" width="60" height="60"></div>
-        <div class="list-group list-group-flush">
-            <a href="welcome.php?page=1" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-            <a href="welcome.php?page=2" class="list-group-item list-group-item-action bg-light">Create Quiz</a>
-            <a href="welcome.php?page=3" class="list-group-item list-group-item-action bg-light">View Quizzes</a>
-        </div>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <button class="btn btn-primary" id="menu-toggle">Show/Hide Menu</button>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <div class="container">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. </container>
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #373737;">
+        <div class="navbar-collapse collapse w-100 ml-auto d-flex align-items-center" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-start">
+                <li class="nav-item">
+                    <a href="index.php" class="navbar-brand p-0"><img src="img/Qlogo.png" width="32" height="30" alt="Quizzical"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
                 </li>
-                <li>
-                    <a href="logout.php" class="nav-item">Log Out</a>
+                <li class="nav-item">
+                    <p class="text-uppercase" style="font-size: 70%;vertical-align: super;"><sub><b>SHARE STUDY CHALLENGE</b></sub></p>
                 </li>
             </ul>
-            </div>
-        </nav>
+            <ul class="navbar-nav w-100 justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="welcome.php?page=1">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="welcome.php?page=2">Create</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="welcome.php?page=3">View</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <li class="nav-item">
+                    <h4>Hi, <b><?php echo $_SESSION["username"]; ?></b>.&nbsp;&nbsp;&nbsp;</h4>
+                </li>
+                <li class="nav-item">
+                    <a href="logout.php">
+                        <input type="submit" class="btn btn-success btn-outline-dark" value="Log Out">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <br><br>
+
+    <div class="container-fluid">
+    <div class="jumbotron bg-info">
 
         <?php
         if (@$_GET['page'] == 1 || !(@$_GET['page'])) {
@@ -105,7 +114,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                             <div class="form-group">
                                 <label class="col-md-12 control-label" for=""></label>
                                     <div class="col-md-12"> 
-                                        <input type="submit" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
+                                        <input type="submit" style="margin-left:45%" class="btn btn-success btn-outline-dark" value="Next">
                                     </div>
                             </div>
                         </fieldset>
@@ -224,20 +233,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         }
         ?>
 
-            </div>
-        </div>
-        <!-- /#page-content-wrapper -->
-
     </div>
-    <!-- /#wrapper -->
-
-    <!-- Menu Toggle Script -->
-    <script>
-        $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-        });
-    </script>
+    </div>
 
 </body>
 </html>

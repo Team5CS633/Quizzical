@@ -1,10 +1,14 @@
+/* Body Background  --> below */
+
 body {
-    
-    background:#1338BE;
+    background:#eeeeee;
+    overflow-x: hidden;
 }
 
+/* Login and Register Form  --> below */
+
 .form_bg {
-    background-color:#3D9970;
+    background-color: #17a2b8;
     padding:20px;
     border-radius:10px;
     position: absolute;
@@ -15,15 +19,17 @@ body {
     bottom: 0;
     left: 0;
     width: 320px;
-    height: 360px;
+    height: 400px;
 }
 
-.modal {
+/* Register Form Modal --> below */
+
+.modal-dialog {
    position: absolute;
-   top: 10px;
-   right: 100px;
-   bottom: 0;
+   margin-left: auto;
+   margin-right: auto;
    left: 0;
+   right: 0;
    z-index: 10040;
    overflow: auto;
    overflow-y: auto;
@@ -32,4 +38,61 @@ body {
 .align-center {
     
     text-align:center;
+}
+
+/* Main Page Jumbotron --> below */
+
+.jumbotron {
+    background-color: #17a2b8; 
+}
+
+/* Buttons --> below */
+
+.btn-success {
+  background-color: #d6d6d6;
+  color: #000;
+}
+
+.btn-success:hover {
+color: #17a2b8;
+}
+
+
+/* Cards --> below */
+
+.card-header {
+  background-color: #373737;
+}
+
+/* Menu --> below */
+
+.nav-item {
+  color: #fff;
+}
+
+.nav-link {
+  color: #fff;
+}
+
+/* Select Boxes Background  --> below */
+
+.bloc {
+  width: 100%;
+  vertical-align: top;
+  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.bloc select {
+  width: 100%;
+  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+select option {
+    background: #ffffff;
+    color: #000;
+    text-shadow: #fff;
 }

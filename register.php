@@ -80,14 +80,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Show MODAL
                 echo '
                     <div class="accountSuccessfulModal" tabindex="-1" role="dialog">
-                        <div class="modal-dialog" role="document">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Registration</h5>
                                 </div>
                                 <div class="modal-body">
                                     <p>Account Creation Successful.</p>
-                                    <p>Redirecting to login in <span id="countdowntimer">10</span> seconds. Otherwise, click <a href="index.php">here</a>.</p>
+                                    <p>Redirecting to login page in <span id="countdowntimer">10</span> seconds. Otherwise, click <a href="login.php">here</a>.</p>
                                 </div>
                             </div>
                         </div>
@@ -95,9 +95,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ';
                 // Redirect to login page
                 echo '
-                    <meta http-equiv="refresh" content="10;url=index.php" />
+                    <meta http-equiv="refresh" content="10;url=login.php" />
                 ';
-                // header("location: index.php");
             } else {
                 echo "Something went wrong. Please try again later.";
             }
@@ -147,27 +146,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #3D9970;">
-        <a href="#" class="navbar-brand">
-            <img src="img/Qlogo.png" height="28" alt="Quizzical">
-        </a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav">
-                <a href="index.php" class="nav-item nav-link">Home</a>
-                <a href="about.php" class="nav-item nav-link">About</a>
-            </div>
-            <div class="navbar-nav ml-auto">
-                <a href="login.php" class="nav-item nav-link">
-                    <input type="submit" class="btn btn-info btn-outline-dark" value="Login">
-                </a>
-                <a href="register.php" class="nav-item nav-link">
-                    <input type="submit" class="btn btn-info btn-outline-dark" value="Register">
-                </a>
-            </div>
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #373737;">
+        <div class="navbar-collapse collapse w-100 ml-auto d-flex align-items-center" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-start">
+                <li class="nav-item">
+                    <a href="index.php" class="navbar-brand p-0"><img src="img/Qlogo.png" width="32" height="30" alt="Quizzical"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <p class="text-uppercase" style="font-size: 70%;vertical-align: super;"><sub><b>SHARE STUDY CHALLENGE</b></sub></p>
+                </li>
+            </ul>
+            <ul class="navbar-nav w-100 justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="about.php">About</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <li class="nav-item">
+                    <a href="login.php" class="nav-item nav-link">
+                        <input type="submit" class="btn btn-success btn-outline-dark" value="Login">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="register.php" class="nav-item nav-link">
+                        <input type="submit" class="btn btn-success btn-outline-dark" value="Register">
+                    </a>
+                </li>
+            </ul>
         </div>
     </nav>
 
@@ -189,10 +197,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="badge"><?php echo $confirm_password_err; ?></div>
                     </div>
                     <div class="align-center">
-                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <input type="submit" class="btn btn-success btn-outline-dark" value="Register">
                     </div>
                     <br>
-                    <p>Already have an account? <a href="index.php">Login here</a>.</p>
+                    <p>Already have an account? <a href="login.php">Login here</a>.</p>
                 </form>
             </div>
         </div>

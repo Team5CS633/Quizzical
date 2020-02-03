@@ -3,6 +3,21 @@ body {
     background:#1338BE;
 }
 
+.form_bg {
+    background-color:#3D9970;
+    padding:20px;
+    border-radius:10px;
+    position: absolute;
+    border:2px solid #000;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 320px;
+    height: 360px;
+}
+
 .modal {
    position: absolute;
    top: 10px;
@@ -12,22 +27,6 @@ body {
    z-index: 10040;
    overflow: auto;
    overflow-y: auto;
-}
-
-.form_bg {
-    background-color:#fff;
-    color:#666;
-    padding:20px;
-    border-radius:10px;
-    position: absolute;
-    border:1px solid #fff;
-    margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 320px;
-    height: 400px;
 }
 
 .align-center {

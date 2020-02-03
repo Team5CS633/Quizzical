@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="css/main.css">
 
     <script>
         // Creates and focuses the bootstrap modal
@@ -146,6 +146,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #3D9970;">
+        <a href="#" class="navbar-brand">
+            <img src="img/Qlogo.png" height="28" alt="Quizzical">
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="index.php" class="nav-item nav-link">Home</a>
+                <a href="about.php" class="nav-item nav-link">About</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a href="login.php" class="nav-item nav-link">
+                    <input type="submit" class="btn btn-info btn-outline-dark" value="Login">
+                </a>
+                <a href="register.php" class="nav-item nav-link">
+                    <input type="submit" class="btn btn-info btn-outline-dark" value="Register">
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
         <div class="row">
             <div class="form_bg">

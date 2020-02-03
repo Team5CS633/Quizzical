@@ -1,9 +1,9 @@
 <?php
 // Database Settings
-define('DB_SERVER', 'sql207.epizy.com');
-define('DB_USERNAME', 'epiz_25095131');
-define('DB_PASSWORD', '9xlV1yCLr6psnG');
-define('DB_NAME', 'epiz_25095131_quizzical');
+define('DB_SERVER', 'localhost');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', 'fakepass');
+define('DB_NAME', 'quizzical');
  
 // Connect to MySQL database
 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);

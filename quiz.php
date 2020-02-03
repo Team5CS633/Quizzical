@@ -11,10 +11,43 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="css/quiz.css">
+    <link rel="stylesheet" href="css/main.css">
 
 </head>
 <body>
+
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #373737;">
+        <div class="navbar-collapse collapse w-100 ml-auto d-flex align-items-center" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-start">
+                <li class="nav-item">
+                    <a href="index.php" class="navbar-brand p-0"><img src="img/Qlogo.png" width="32" height="30" alt="Quizzical"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <p class="text-uppercase" style="font-size: 70%;vertical-align: super;"><sub><b>SHARE STUDY CHALLENGE</b></sub></p>
+                </li>
+            </ul>
+            <ul class="navbar-nav w-100 justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="about.php">About</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                <li class="nav-item">
+                    <a href="login.php" class="nav-item nav-link">
+                        <input type="submit" class="btn btn-success btn-outline-dark" value="Login">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="register.php" class="nav-item nav-link">
+                        <input type="submit" class="btn btn-success btn-outline-dark" value="Register">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
 <?php
 include_once 'config.php';
@@ -29,11 +62,17 @@ if (@$_GET['eid']) {
     $quizName   = $sQuiz['title'];
 
     echo '
+        <div class="jumbotron bg-info">
         <div class="container">
             <div class="text-center">
-                <h1>' . $quizName . '</h1>
+                <h1 class="text-white">' . $quizName . '</h1>
             </div>
-            <br>
+        </div>
+        </div>
+        
+        <br>
+
+        <div class="container">
     ';
 
 }
@@ -55,7 +94,7 @@ if (@$_GET['page'] == 'quiz' && !(@$_GET['step'])) {
         $sn = $row['sn'];
 
         echo '
-            <div class="card">
+            <div class="card text-white bg-info border-dark">
                 <div class="card-header">Question ' . $sn . ' - ' . $qns . '
                 </div>
                 <div class="card-body">
@@ -93,9 +132,12 @@ if (@$_GET['page'] == 'quiz' && !(@$_GET['step'])) {
  
     echo '
             <div class="text-center">
-                <input type="submit" value="Submit Quiz">
+                <input type="submit" class="btn btn-success btn-outline-dark" value="Submit Quiz">
             </div>
             </form>
+
+            <br><br><br>
+
         </div>
     ';
 

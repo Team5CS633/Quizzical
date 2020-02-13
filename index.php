@@ -31,17 +31,14 @@ require_once "config.php";
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #373737;">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #373737;">
         <div class="navbar-collapse collapse w-100 ml-auto d-flex align-items-center" id="collapsingNavbar3">
         <ul class="navbar-nav w-100 justify-content-start">
                 <li class="nav-item">
-                    <a href="index.php" class="navbar-brand p-0"><img src="img/Qlogo.png" width="32" height="30" alt="Quizzical"></a>
+                    <a href="index.php" class="logo navbar-brand p-0"><img src="img/Qlogo.png" width="70" height="70" alt="Quizzical"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                     <span class="navbar-toggler-icon"></span>
                     </button>
-                </li>
-                <li class="nav-item">
-                    <p class="text-uppercase" style="font-size: 70%;vertical-align: super;"><sub><b>SHARE STUDY CHALLENGE</b></sub></p>
                 </li>
             </ul>
             <ul class="navbar-nav w-100 justify-content-center">
@@ -69,64 +66,36 @@ require_once "config.php";
     <div class="container-fluid">
     <div class="jumbotron text-center">
         <h1 class="display-2 text-white"><b>Quizzical</b></h1>
-        <p class="lead">Open platform web-based tool to allow users to learn through the ability to create and take quizzes</p>
+        <p class="text-black"><b>open platform web-based tool to allow users to learn through the ability to create and take quizzes</b></p>
         <p><a href="register.php" target="_blank" class="btn btn-success btn-lg btn-outline-dark">Sign Up Today</a></p>
     </div>
 
     <div class="container">
         <div class="row">
 
-            <div class="col-sm-3">
-            <div class="card text-white bg-info border-dark shadow-lg mb-3" style="max-width: 18rem;">
-                <div class="card-header">Featured
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Quiz Title</h5>
-                    <p class="card-text">Feature not available yet. Saving spot for top quiz.</p>
-                </div>
-                <div class="card-footer bg-transparent">Take Quiz
-                </div>
-            </div>
-            </div>
+        <?php
+        $result = mysqli_query($link, "SELECT * FROM quiz ORDER BY views DESC LIMIT 4") or die('Error');
 
-            <div class="col-sm-3">
-            <div class="card text-white bg-info border-dark shadow-lg mb-3" style="max-width: 18rem;">
-                <div class="card-header">Featured
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Quiz Title</h5>
-                    <p class="card-text">Feature not available yet. Saving spot for top quiz.</p>
-                </div>
-                <div class="card-footer bg-transparent">Take Quiz
-                </div>
-            </div>
-            </div>
+        while ($row = mysqli_fetch_array($result)) {
 
-            <div class="col-sm-3">
-            <div class="card text-white bg-info border-dark shadow-lg mb-3" style="max-width: 18rem;">
-                <div class="card-header">Featured
+            echo'
+                <div class="col-sm-3">
+                <div class="card text-white bg-info border-dark shadow-lg mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Featured
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">' . $row['title'] . '</h5>
+                        <p class="card-text">' . $row['description'] . '</p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="quiz.php?page=quiz&eid=' . $row['eid'] . '" class="text-white">Take Quiz</a>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Quiz Title</h5>
-                    <p class="card-text">Feature not available yet. Saving spot for top quiz.</p>
                 </div>
-                <div class="card-footer bg-transparent">Take Quiz
-                </div>
-            </div>
-            </div>
-
-            <div class="col-sm-3">
-            <div class="card text-white bg-info border-dark shadow-lg mb-3" style="max-width: 18rem;">
-                <div class="card-header">Featured
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Quiz Title</h5>
-                    <p class="card-text">Feature not available yet. Saving spot for top quiz.</p>
-                </div>
-                <div class="card-footer bg-transparent">Take Quiz
-                </div>
-            </div>
-            </div>
+            ';
+        
+        }
+        ?>
 
         </div>
     </div>
@@ -136,57 +105,29 @@ require_once "config.php";
     <div class="container">
         <div class="row">
 
-            <div class="col-sm-3">
-            <div class="card text-white bg-info border-dark shadow-lg mb-3" style="max-width: 18rem;">
-                <div class="card-header">New
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Quiz Title</h5>
-                    <p class="card-text">Feature not available yet. Saving spot for newly created quizzes.</p>
-                </div>
-                <div class="card-footer bg-transparent">Take Quiz
-                </div>
-            </div>
-            </div>
+        <?php
+        $result = mysqli_query($link, "SELECT * FROM quiz ORDER BY date DESC LIMIT 4") or die('Error');
 
-            <div class="col-sm-3">
-            <div class="card text-white bg-info border-dark shadow-lg mb-3" style="max-width: 18rem;">
-                <div class="card-header">New
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Quiz Title</h5>
-                    <p class="card-text">Feature not available yet. Saving spot for newly created quizzes.</p>
-                </div>
-                <div class="card-footer bg-transparent">Take Quiz
-                </div>
-            </div>
-            </div>
+        while ($row = mysqli_fetch_array($result)) {
 
-            <div class="col-sm-3">
-            <div class="card text-white bg-info border-dark shadow-lg mb-3" style="max-width: 18rem;">
-                <div class="card-header">New
+            echo'
+                <div class="col-sm-3">
+                <div class="card text-white bg-info border-dark shadow-lg mb-3" style="max-width: 18rem;">
+                    <div class="card-header">New
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">' . $row['title'] . '</h5>
+                        <p class="card-text">' . $row['description'] . '</p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="quiz.php?page=quiz&eid=' . $row['eid'] . '" class="text-white">Take Quiz</a>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Quiz Title</h5>
-                    <p class="card-text">Feature not available yet. Saving spot for newly created quizzes.</p>
                 </div>
-                <div class="card-footer bg-transparent">Take Quiz
-                </div>
-            </div>
-            </div>
-
-            <div class="col-sm-3">
-            <div class="card text-white bg-info border-dark shadow-lg mb-3" style="max-width: 18rem;">
-                <div class="card-header">New
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Quiz Title</h5>
-                    <p class="card-text">Feature not available yet. Saving spot for newly created quizzes.</p>
-                </div>
-                <div class="card-footer bg-transparent">Take Quiz
-                </div>
-            </div>
-            </div>
+            ';
+        
+        }
+        ?>
 
         </div>
     </div>

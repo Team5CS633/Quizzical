@@ -1,7 +1,14 @@
+/* Logo  --> below */
+.logo {
+ position: fixed;
+ top: 0.5em;
+ left: 0.5em;
+}
+
 /* Body Background  --> below */
 
 body {
-    background:#eeeeee;
+    background: #ccccc9;
     overflow-x: hidden;
 }
 

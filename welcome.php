@@ -30,34 +30,22 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #373737;">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #373737;">
         <div class="navbar-collapse collapse w-100 ml-auto d-flex align-items-center" id="collapsingNavbar3">
         <ul class="navbar-nav w-100 justify-content-start">
                 <li class="nav-item">
-                    <a href="index.php" class="navbar-brand p-0"><img src="img/Qlogo.png" width="32" height="30" alt="Quizzical"></a>
+                    <a href="index.php" class="logo navbar-brand p-0"><img src="img/Qlogo.png" width="70" height="70" alt="Quizzical"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                     <span class="navbar-toggler-icon"></span>
                     </button>
-                </li>
-                <li class="nav-item">
-                    <p class="text-uppercase" style="font-size: 70%;vertical-align: super;"><sub><b>SHARE STUDY CHALLENGE</b></sub></p>
                 </li>
             </ul>
             <ul class="navbar-nav w-100 justify-content-center">
                 <li class="nav-item">
                     <a class="nav-link text-white" href="welcome.php?page=1">Dashboard</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="welcome.php?page=2">Create</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="welcome.php?page=3">View</a>
-                </li>
             </ul>
             <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-                <li class="nav-item">
-                    <h4>Hi, <b><?php echo $_SESSION["username"]; ?></b>.&nbsp;&nbsp;&nbsp;</h4>
-                </li>
                 <li class="nav-item">
                     <a href="logout.php">
                         <input type="submit" class="btn btn-success btn-outline-dark" value="Log Out">
@@ -76,12 +64,44 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         if (@$_GET['page'] == 1 || !(@$_GET['page'])) {
 
             echo '
-                <div class="container-fluid">
-                    <h1 class="mt-4"><b>Welcome</b>!</h1>
-                    <p>This is your dashboard.</p>
+                <div class="container-fluid text-center">
+                    <h1>Hi, <b>' . $_SESSION["username"] . '</b>!</h1>
+                </div>
+
+                <br>
+
+    </div>
+    </div>
+            ';
+            
+            echo '
+                <div class="row">
+                    <div class="col-sm-1">
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card text-white bg-info border-dark mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Let\'s get started!</h5>
+                                <p class="card-text text-center">What would you like to do?</p>
+                                <p class="card-text text-center"><a class="text-white" href="welcome.php?page=2"><u>Create a Quiz</u></a></p>
+                                <p class="card-text text-center"><a class="text-white" href="welcome.php?page=3"><u>View Quizzes</u></a></p>
+                                <p class="card-text text-center"><a class="text-white" href="#"><u>Search for a Quiz</u></a></p>
+                                <p class="card-text text-center"><a class="text-white" href="#"><u>Join a Group</u></a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="container border-dark">
+                            <img src="img/DashImg.png" class="img-fluid rounded mx-auto d-block" alt="Dashboard Image">
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                    </div>
                 </div>
             ';
-                    
+
         }
 
 
@@ -89,15 +109,21 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             
             echo ' 
                 <div class="row">
-                    <span class="title1" style="margin-left:40%;font-size:30px;"><b>Enter Quiz Details</b></span><br /><br />
+                    <span class="title1" style="margin-left:40%;font-size:30px;"><b>Enter Quiz Details</b></span><br><br>
                     <div class="col-md-3"></div><div class="col-md-6">   
                         <form class="form-horizontal title1" name="form" action="update.php?page=addquiz" method="POST">
                         <fieldset>
                             <div class="form-group">
                                 <label class="col-md-12 control-label" for="name"></label>  
                                     <div class="col-md-12">
-                                        <input id="name" name="name" placeholder="Enter Quiz title" class="form-control input-md" type="text">
+                                        <input id="name" name="name" placeholder="Enter quiz title" class="form-control input-md" type="text">
                                     </div>
+                            </div>
+                            <div class="form-group">
+                            <label class="col-md-12 control-label" for="description"></label>  
+                                <div class="col-md-12">
+                                    <input id="description" name="description" placeholder="Description for quiz" class="form-control input-md" type="text">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12 control-label" for="total"></label>  
@@ -148,26 +174,26 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         </div>
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="' . $i . '1"></label>  
-                                <div class="col-md-12">
-                                    <input id="' . $i . '1" name="' . $i . '1" placeholder="Enter option a" class="form-control input-md" type="text">
-                                </div>
+                            <div class="col-md-12">
+                                Option A - <input id="' . $i . '1" name="' . $i . '1" placeholder="Enter option a" class="form-control input-md" type="text">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="' . $i . '2"></label>  
                             <div class="col-md-12">
-                                <input id="' . $i . '2" name="' . $i . '2" placeholder="Enter option b" class="form-control input-md" type="text">
+                                Option B - <input id="' . $i . '2" name="' . $i . '2" placeholder="Enter option b" class="form-control input-md" type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="' . $i . '3"></label>  
                             <div class="col-md-12">
-                                <input id="' . $i . '3" name="' . $i . '3" placeholder="Enter option c" class="form-control input-md" type="text">
+                                Option C - <input id="' . $i . '3" name="' . $i . '3" placeholder="Enter option c" class="form-control input-md" type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="' . $i . '4"></label>  
                             <div class="col-md-12">
-                                <input id="' . $i . '4" name="' . $i . '4" placeholder="Enter option d" class="form-control input-md" type="text">
+                                Option D - <input id="' . $i . '4" name="' . $i . '4" placeholder="Enter option d" class="form-control input-md" type="text">
                             </div>
                         </div>
                         <br /><b>Correct answer</b>:<br />
@@ -200,7 +226,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             $result = mysqli_query($link, "SELECT * FROM quiz ORDER BY date DESC") or die('Error');
             
             echo '
-                <div class="panel"><table class="table table-striped title1"  style="vertical-align:middle">
+                <div class="panel"><table class="table table-striped title1" style="vertical-align:middle">
                 <tr>
                 <td style="vertical-align:middle"><b>Name</b></td>
                 <td style="vertical-align:middle"><b>Created By</b></td>

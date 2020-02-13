@@ -31,17 +31,14 @@ require_once "config.php";
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #373737;">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #373737;">
         <div class="navbar-collapse collapse w-100 ml-auto d-flex align-items-center" id="collapsingNavbar3">
         <ul class="navbar-nav w-100 justify-content-start">
                 <li class="nav-item">
-                    <a href="index.php" class="navbar-brand p-0"><img src="img/Qlogo.png" width="32" height="30" alt="Quizzical"></a>
+                    <a href="index.php" class="logo navbar-brand p-0"><img src="img/Qlogo.png" width="70" height="70" alt="Quizzical"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                     <span class="navbar-toggler-icon"></span>
                     </button>
-                </li>
-                <li class="nav-item">
-                    <p class="text-uppercase" style="font-size: 70%;vertical-align: super;"><sub><b>SHARE STUDY CHALLENGE</b></sub></p>
                 </li>
             </ul>
             <ul class="navbar-nav w-100 justify-content-center">
@@ -69,7 +66,8 @@ require_once "config.php";
     <div class="container-fluid">
     <div class="jumbotron text-center">
         <h1 class="display-2 text-white"><b>About Us</b></h1>
-        <p class="lead">Team 5 from course CS 633 at Boston University.</p>
+        <p class="text-black"><b>Team 5 from course CS 633 at Boston University</b></p>
+        <p class="text-black"><b>Mission: "Quizzical, Let's Create, Share, and Learn Together"</b></p>
     </div>
     </div>
 
@@ -82,18 +80,19 @@ require_once "config.php";
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Jimmy</h5>
-                    <p class="card-text">Hi.</p>
+                    <p class="card-text">Group Project Policy, Meeting Facilitator, RASCI Chart Creator, Pivotal Tracker User Requirements Manager,
+Persona Creator, Estimation Record Keeper, Wireframe Designer</p>
                 </div>
             </div>
             </div>
 
             <div class="col-sm-4">
             <div class="card text-white bg-info border-dark shadow-lg mb-3" style="max-width: 18rem;">
-                <div class="card-header">QA and Tester
+                <div class="card-header">UI/UX/QA and System Tester
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Sami</h5>
-                    <p class="card-text">Hi.</p>
+                    <p class="card-text">Logo and Component Interaction Design, State Transition and Tool Connectivity Diagrams, User Requirements, Test and Use Cases, All-Pairs Testing</p>
                 </div>
             </div>
             </div>
@@ -104,7 +103,7 @@ require_once "config.php";
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Peter</h5>
-                    <p class="card-text">Hi.</p>
+                    <p class="card-text">Development using HTML5/CSS/Bootstrap v4.x/PHP/MySQL, AWS EC2 Manager, GitHub Integrator, Database Administrator, User Requirements</p>
                 </div>
             </div>
             </div>

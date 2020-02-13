@@ -10,19 +10,23 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     exit;
 }
 
-if (isset($_SESSION['loggedin'])) {
+if (isset($_SESSION["loggedin"])) {
     if (@$_GET['page'] == 'addquiz') {
         $id      = uniqid();
         $owner   = $_SESSION["username"];
         $name    = $_POST['name'];
         $name    = ucwords(strtolower($name));
+        $description = $_POST['description'];
+        $views   = (int)0;
         $total   = $_POST['total'];
         $time    = $_POST['time'];
 
-        $q3      = mysqli_query($link, "INSERT INTO quiz VALUES (NULL,'$id','$owner','$name','$total','$time', null) ");
-        header("location:welcome.php?page=2&step=2&eid=$id&n=$total");
+        mysqli_query($link, "INSERT INTO quiz VALUES (NULL,'$id','$owner','$name','$description','$views','$total','$time',NULL)") or die();
+        
+        header("location: welcome.php?page=2&step=2&eid=$id&n=$total");
     }
 }
+
 if (isset($_SESSION['loggedin'])) {
     if (@$_GET['page'] == 'addqns') {
         $n   = @$_GET['n'];
@@ -32,7 +36,7 @@ if (isset($_SESSION['loggedin'])) {
         for ($i = 1; $i <= $n; $i++) {
             $qid  = uniqid();
             $qns  = addslashes($_POST['qns' . $i]);
-            $q3   = mysqli_query($link, "INSERT INTO questions VALUES(NULL,'$eid','$qid','$qns','$ch','$i')") or die();
+            $q3   = mysqli_query($link, "INSERT INTO questions VALUES (NULL,'$eid','$qid','$qns','$ch','$i')") or die();
             $oaid = uniqid();
             $obid = uniqid();
             $ocid = uniqid();

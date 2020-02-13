@@ -106,17 +106,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #373737;">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #373737;">
         <div class="navbar-collapse collapse w-100 ml-auto d-flex align-items-center" id="collapsingNavbar3">
         <ul class="navbar-nav w-100 justify-content-start">
                 <li class="nav-item">
-                    <a href="index.php" class="navbar-brand p-0"><img src="img/Qlogo.png" width="32" height="30" alt="Quizzical"></a>
+                    <a href="index.php" class="logo navbar-brand p-0"><img src="img/Qlogo.png" width="70" height="70" alt="Quizzical"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                     <span class="navbar-toggler-icon"></span>
                     </button>
-                </li>
-                <li class="nav-item">
-                    <p class="text-uppercase" style="font-size: 70%;vertical-align: super;"><sub><b>SHARE STUDY CHALLENGE</b></sub></p>
                 </li>
             </ul>
             <ul class="navbar-nav w-100 justify-content-center">
@@ -139,28 +136,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </nav>
 
+    <br><br>
+
+    <div class="container-fluid">
+    <div class="jumbotron text-center">
+        <h1 class="display-2 text-white"><b>Quizzical</b></h1>
+        <p class="text-black"><b>open platform web-based tool to allow users to learn through the ability to create and take quizzes</b></p>
+        <p><a href="register.php" target="_blank" class="btn btn-success btn-lg btn-outline-dark">Sign Up Today</a></p>
+    </div>
+    </div>
+
     <div class="container">
         <div class="row">
-            <div class="form_bg">
-                <form class="needs-validation" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
-                    <h2 class="text-center"><img src="img/Qlogo.png" width="60" height="60"></h2>
-                    <br>
-                    <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                        <input type="text" name="username" class="form-control" value="<?php echo $username; ?>" placeholder="Username" required>
-                        <div class="badge"><?php echo $username_err; ?></div>
-                    </div>    
-                    <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                        <input type="password" name="password" class="form-control" placeholder="Password" required>
-                        <div class="badge"><?php echo $password_err; ?></div>
-                    </div>
-                    <div class="align-center">
-                        <input type="submit" class="btn btn-success btn-outline-dark" value="Login">
-                    </div>
-                    <br>
-                    <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
-                </form>
+            <div class="col-sm-1">
             </div>
-        <div class="row">
+            <div class="col-sm-4">
+                <div class="card text-white bg-info border-dark mb-4">
+                    <div class="card-body">
+                        <div class="form">
+                            <form class="needs-validation" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
+                                <h2 class="text-center"><img src="img/Qlogo.png" width="60" height="60"></h2>
+                                
+                                <br>
+
+                                <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                                    <input type="text" name="username" class="form-control" value="<?php echo $username; ?>" placeholder="Username" required>
+                                    <div class="badge"><?php echo $username_err; ?></div>
+                                </div>    
+                                <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                    <div class="badge"><?php echo $password_err; ?></div>
+                                </div>
+                                <div class="align-center">
+                                    <input type="submit" class="btn btn-success btn-outline-dark" value="Login">
+                                </div>
+                                    
+                                <br>
+
+                                <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-5">
+                <div class="container border-dark">
+                    <img src="img/QuizImg.png" class="img-fluid rounded mx-auto d-block" alt="Quiz Image">
+                </div>
+            </div>
+            <div class="col-sm-1">
+            </div>
+        </div>
     </div>
+
 </body>
 </html>

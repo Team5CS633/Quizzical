@@ -16,17 +16,14 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #373737;">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #373737;">
         <div class="navbar-collapse collapse w-100 ml-auto d-flex align-items-center" id="collapsingNavbar3">
         <ul class="navbar-nav w-100 justify-content-start">
                 <li class="nav-item">
-                    <a href="index.php" class="navbar-brand p-0"><img src="img/Qlogo.png" width="32" height="30" alt="Quizzical"></a>
+                    <a href="index.php" class="logo navbar-brand p-0"><img src="img/Qlogo.png" width="70" height="70" alt="Quizzical"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                     <span class="navbar-toggler-icon"></span>
                     </button>
-                </li>
-                <li class="nav-item">
-                    <p class="text-uppercase" style="font-size: 70%;vertical-align: super;"><sub><b>SHARE STUDY CHALLENGE</b></sub></p>
                 </li>
             </ul>
             <ul class="navbar-nav w-100 justify-content-center">
@@ -61,9 +58,13 @@ if (@$_GET['eid']) {
     $sQuiz      = mysqli_fetch_array($s);
     $quizName   = $sQuiz['title'];
 
+    $updatedViews = $sQuiz['views'] + 1;
+    mysqli_query($link, "UPDATE quiz SET views='$updatedViews' WHERE eid='$eid' ");
+
     echo '
         <div class="jumbotron bg-info">
         <div class="container">
+            <br>
             <div class="text-center">
                 <h1 class="text-white">' . $quizName . '</h1>
             </div>
@@ -132,7 +133,7 @@ if (@$_GET['page'] == 'quiz' && !(@$_GET['step'])) {
  
     echo '
             <div class="text-center">
-                <input type="submit" class="btn btn-success btn-outline-dark" value="Submit Quiz">
+                <input type="submit" class="btn btn-info btn-outline-dark" value="Submit Quiz">
             </div>
             </form>
 

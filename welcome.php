@@ -34,7 +34,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         <div class="navbar-collapse collapse w-100 ml-auto d-flex align-items-center" id="collapsingNavbar3">
         <ul class="navbar-nav w-100 justify-content-start">
                 <li class="nav-item">
-                    <a href="index.php" class="logo navbar-brand p-0"><img src="img/Qlogo.png" width="70" height="70" alt="Quizzical"></a>
+                    <a href="index.php" class="logo navbar-brand p-0"><img src="img/Qlogo.png" width="80" height="80" alt="Quizzical"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                     <span class="navbar-toggler-icon"></span>
                     </button>
@@ -78,13 +78,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 <div class="row">
                     <div class="col-sm-1">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="card text-white bg-info border-dark mb-4">
                             <div class="card-body">
                                 <h5 class="card-title text-center">Let\'s get started!</h5>
                                 <p class="card-text text-center">What would you like to do?</p>
                                 <p class="card-text text-center"><a class="text-white" href="welcome.php?page=2"><u>Create a Quiz</u></a></p>
-                                <p class="card-text text-center"><a class="text-white" href="welcome.php?page=3"><u>View Quizzes</u></a></p>
+                                <p class="card-text text-center"><a class="text-white" href="welcome.php?page=3"><u>Take/View Quizzes</u></a></p>
                                 <p class="card-text text-center"><a class="text-white" href="#"><u>Search for a Quiz</u></a></p>
                                 <p class="card-text text-center"><a class="text-white" href="#"><u>Join a Group</u></a></p>
                             </div>
@@ -116,25 +116,25 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                             <div class="form-group">
                                 <label class="col-md-12 control-label" for="name"></label>  
                                     <div class="col-md-12">
-                                        <input id="name" name="name" placeholder="Enter quiz title" class="form-control input-md" type="text">
+                                        <input id="name" name="name" placeholder="Enter quiz title" class="form-control input-md" type="text" required>
                                     </div>
                             </div>
                             <div class="form-group">
                             <label class="col-md-12 control-label" for="description"></label>  
                                 <div class="col-md-12">
-                                    <input id="description" name="description" placeholder="Description for quiz" class="form-control input-md" type="text">
+                                    <input id="description" name="description" placeholder="Description for quiz" class="form-control input-md" type="text" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12 control-label" for="total"></label>  
                                 <div class="col-md-12">
-                                    <input id="total" name="total" placeholder="Enter total number of questions" class="form-control input-md" type="number">
+                                    <input id="total" name="total" placeholder="Enter total number of questions" class="form-control input-md" type="number" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12 control-label" for="time"></label>  
                                     <div class="col-md-12">
-                                        <input id="time" name="time" placeholder="Enter time limit for test in minute" class="form-control input-md" min="1" type="number">
+                                        <input id="time" name="time" placeholder="Enter time limit for test in minute" class="form-control input-md" min="1" type="number" required>
                                     </div>
                             </div>
                             <div class="form-group">

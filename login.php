@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="navbar-collapse collapse w-100 ml-auto d-flex align-items-center" id="collapsingNavbar3">
         <ul class="navbar-nav w-100 justify-content-start">
                 <li class="nav-item">
-                    <a href="index.php" class="logo navbar-brand p-0"><img src="img/Qlogo.png" width="70" height="70" alt="Quizzical"></a>
+                    <a href="index.php" class="logo navbar-brand p-0"><img src="img/Qlogo.png" width="80" height="80" alt="Quizzical"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                     <span class="navbar-toggler-icon"></span>
                     </button>
@@ -141,8 +141,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container-fluid">
     <div class="jumbotron text-center">
         <h1 class="display-2 text-white"><b>Quizzical</b></h1>
-        <p class="text-black"><b>open platform web-based tool to allow users to learn through the ability to create and take quizzes</b></p>
-        <p><a href="register.php" target="_blank" class="btn btn-success btn-lg btn-outline-dark">Sign Up Today</a></p>
+        <p class="text-black"><b>Let's create, share, and learn together!</b></p>
+        <p class="text-black"><b>Begin your journey by signing in below!</b></p>
     </div>
     </div>
 
@@ -150,15 +150,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="row">
             <div class="col-sm-1">
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="card text-white bg-info border-dark mb-4">
                     <div class="card-body">
                         <div class="form">
                             <form class="needs-validation" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" novalidate>
-                                <h2 class="text-center"><img src="img/Qlogo.png" width="60" height="60"></h2>
-                                
-                                <br>
-
                                 <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                                     <input type="text" name="username" class="form-control" value="<?php echo $username; ?>" placeholder="Username" required>
                                     <div class="badge"><?php echo $username_err; ?></div>
@@ -173,13 +169,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     
                                 <br>
 
-                                <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+                                <div class="align-center">
+                                    <p>Having trouble logging in?<br>Click <a class="text-white" href="#"><u>here</u></a>.</p>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-1">
+            <div class="col-sm-3">
+                <div class="card text-white bg-info border-dark mb-4">
+                    <div class="card-body align-center">
+                        <p>Don't have an account?</p>
+                        <p><a href="register.php" class="btn btn-success btn-lg btn-outline-dark">Register</a></p>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-5">
                 <div class="container border-dark">

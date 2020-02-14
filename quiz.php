@@ -20,7 +20,7 @@
         <div class="navbar-collapse collapse w-100 ml-auto d-flex align-items-center" id="collapsingNavbar3">
         <ul class="navbar-nav w-100 justify-content-start">
                 <li class="nav-item">
-                    <a href="index.php" class="logo navbar-brand p-0"><img src="img/Qlogo.png" width="70" height="70" alt="Quizzical"></a>
+                    <a href="index.php" class="logo navbar-brand p-0"><img src="img/Qlogo.png" width="80" height="80" alt="Quizzical"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                     <span class="navbar-toggler-icon"></span>
                     </button>
@@ -62,12 +62,11 @@ if (@$_GET['eid']) {
     mysqli_query($link, "UPDATE quiz SET views='$updatedViews' WHERE eid='$eid' ");
 
     echo '
-        <div class="jumbotron bg-info">
-        <div class="container">
-            <br>
-            <div class="text-center">
-                <h1 class="text-white">' . $quizName . '</h1>
-            </div>
+        <div class="container-fluid">
+        <div class="jumbotron text-center">
+            <br><br>
+            
+            <h1 class="text-white">' . $quizName . '</h1>
         </div>
         </div>
         
@@ -168,16 +167,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     /* mark the answers */
     foreach ( $_POST as $question => $answer ) {
-        echo $question . ' - ' . $answer . '<br><br>';
         if ( $answer == $answers[$index] ) {
             $score++;
         }
         $index++;
     }
 
+    $scorePercent = ($score / $index) * 100;
+
     /* show score */
     echo '
-        Your score is <b>'. $score . '</b> out of <b>' . $index . '</b>!
+        <div class="align-center">
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-info" style="width: ' . $scorePercent . '%"></div>
+            </div>
+
+            <br>
+
+            Your score is <b>'. $score . '</b> out of <b>' . $index . '</b>!
+        </div>
     ';
 
 }

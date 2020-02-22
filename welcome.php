@@ -1,8 +1,5 @@
 <?php
-include_once 'config.php';
-
-// Initialize the session
-session_start();
+include_once 'header.php';
  
 // Check if the user is logged in, if not then redirect him to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
@@ -10,52 +7,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     exit;
 }
 ?>
- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Quizzical - Logged In</title>
-    <!-- Bootstrap CSS -->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="css/main.css">
-
-</head>
-
-<body>
-
-    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #373737;">
-        <div class="navbar-collapse collapse w-100 ml-auto d-flex align-items-center" id="collapsingNavbar3">
-        <ul class="navbar-nav w-100 justify-content-start">
-                <li class="nav-item">
-                    <a href="index.php" class="logo navbar-brand p-0"><img src="img/Qlogo.png" width="80" height="80" alt="Quizzical"></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
-                    <span class="navbar-toggler-icon"></span>
-                    </button>
-                </li>
-            </ul>
-            <ul class="navbar-nav w-100 justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="welcome.php?page=1">Dashboard</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-                <li class="nav-item">
-                    <a href="logout.php">
-                        <input type="submit" class="btn btn-success btn-outline-dark" value="Log Out">
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <br><br>
 
     <div class="container-fluid">
     <div class="jumbotron bg-info">
@@ -84,9 +35,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                 <h5 class="card-title text-center">Let\'s get started!</h5>
                                 <p class="card-text text-center">What would you like to do?</p>
                                 <p class="card-text text-center"><a class="text-white" href="welcome.php?page=2"><u>Create a Quiz</u></a></p>
-                                <p class="card-text text-center"><a class="text-white" href="welcome.php?page=3"><u>Take/View Quizzes</u></a></p>
-                                <p class="card-text text-center"><a class="text-white" href="#"><u>Search for a Quiz</u></a></p>
-                                <p class="card-text text-center"><a class="text-white" href="#"><u>Join a Group</u></a></p>
+                                <p class="card-text text-center"><a class="text-white" href="welcome.php?page=3"><u>View/Share/Take your Quizzes</u></a></p>
+                                <p class="card-text text-center"><a href="#featureUnavailableModal" class="text-white" data-toggle="modal" data-target="#featureUnavailableModal"><u>Search for a Quiz</u></a></p>
+                                <p class="card-text text-center"><a href="#featureUnavailableModal" class="text-white" data-toggle="modal" data-target="#featureUnavailableModal"><u>Join a Group</u></a></p>
                             </div>
                         </div>
                     </div>
@@ -128,13 +79,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                             <div class="form-group">
                                 <label class="col-md-12 control-label" for="total"></label>  
                                 <div class="col-md-12">
-                                    <input id="total" name="total" placeholder="Enter total number of questions" class="form-control input-md" type="number" required>
+                                    <input id="total" name="total" placeholder="Enter total number of questions" class="form-control input-md" type="number" max="10" min="1" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12 control-label" for="time"></label>  
                                     <div class="col-md-12">
-                                        <input id="time" name="time" placeholder="Enter time limit for test in minute" class="form-control input-md" min="1" type="number" required>
+                                        <input id="time" name="time" placeholder="Time limit feature currently unavailable" class="form-control input-md" min="1" type="number" required disabled>
                                     </div>
                             </div>
                             <div class="form-group">
@@ -223,7 +174,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
         if (@$_GET['page'] == 3) {
     
-            $result = mysqli_query($link, "SELECT * FROM quiz ORDER BY date DESC") or die('Error');
+            $result = mysqli_query($link, "SELECT * FROM quiz WHERE owner='$_SESSION[username]' ORDER BY date DESC") or die('Error');
             
             echo '
                 <div class="panel"><table class="table table-striped title1" style="vertical-align:middle">

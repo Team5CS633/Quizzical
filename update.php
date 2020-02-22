@@ -19,7 +19,7 @@ if (isset($_SESSION["loggedin"])) {
         $description = $_POST['description'];
         $views   = (int)0;
         $total   = $_POST['total'];
-        $time    = $_POST['time'];
+        $time    = 5;
 
         mysqli_query($link, "INSERT INTO quiz VALUES (NULL,'$id','$owner','$name','$description','$views','$total','$time',NULL)") or die();
         

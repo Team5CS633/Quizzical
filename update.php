@@ -27,6 +27,24 @@ if (isset($_SESSION["loggedin"])) {
     }
 }
 
+if (isset($_SESSION["loggedin"])) {
+    if (@$_GET['page'] == 'deletequiz') {
+
+        $eid = @$_GET['eid'];
+        $row = mysqli_query($link, "SELECT FROM quiz WHERE eid='$eid'");
+        $name = $row['owner'];
+        $row2 = mysqli_query($link, "SELECT FROM questions WHERE eid='$eid' LIMIT 1");
+        $qid = $row2['qid'];
+
+        mysqli_query($link, "DELETE FROM quiz WHERE eid='$eid'");
+        mysqli_query($link, "DELETE FROM questions WHERE eid='$eid'");
+        mysqli_query($link, "DELETE FROM options WHERE qid='$qid'");
+        mysqli_query($link, "DELETE FROM answer WHERE qid='$qid'");
+        
+        header("location: welcome.php?page=3");
+    }
+}
+
 if (isset($_SESSION['loggedin'])) {
     if (@$_GET['page'] == 'addqns') {
         $n   = @$_GET['n'];

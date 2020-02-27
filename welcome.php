@@ -35,9 +35,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                 <h5 class="card-title text-center">Let\'s get started!</h5>
                                 <p class="card-text text-center">What would you like to do?</p>
                                 <p class="card-text text-center"><a class="text-white" href="welcome.php?page=2"><u>Create a Quiz</u></a></p>
-                                <p class="card-text text-center"><a class="text-white" href="welcome.php?page=3"><u>View/Share/Take your Quizzes</u></a></p>
-                                <p class="card-text text-center"><a href="#featureUnavailableModal" class="text-white" data-toggle="modal" data-target="#featureUnavailableModal"><u>Search for a Quiz</u></a></p>
-                                <p class="card-text text-center"><a href="#featureUnavailableModal" class="text-white" data-toggle="modal" data-target="#featureUnavailableModal"><u>Join a Group</u></a></p>
+                                <p class="card-text text-center"><a class="text-white" href="welcome.php?page=3"><u>Take/Share/Delete your Quizzes</u></a></p>
+                                <p class="card-text text-center"><a class="text-white" href="#" data-toggle="popover" data-trigger="focus" title="Feature Unavailable" data-content="Our engineers are still working on this feature; it will be available in the near future."><u>Search for a Quiz</u></a></p>
+                                <p class="card-text text-center"><a class="text-white" href="#" data-toggle="popover" data-trigger="focus" title="Feature Unavailable" data-content="Our engineers are still working on this feature; it will be available in the near future."><u>Join a Group</u></a></p>
                             </div>
                         </div>
                     </div>
@@ -120,31 +120,31 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="qns' . $i . ' "></label>  
                                 <div class="col-md-12">
-                                    <textarea rows="3" cols="5" name="qns' . $i . '" class="form-control" placeholder="Write question number ' . $i . ' here..."></textarea>  
+                                    <textarea rows="3" cols="5" name="qns' . $i . '" class="form-control" placeholder="Write question number ' . $i . ' here..." required></textarea>  
                                 </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="' . $i . '1"></label>  
                             <div class="col-md-12">
-                                Option A - <input id="' . $i . '1" name="' . $i . '1" placeholder="Enter option a" class="form-control input-md" type="text">
+                                Option A - <input id="' . $i . '1" name="' . $i . '1" placeholder="Enter option a" class="form-control input-md" type="text" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="' . $i . '2"></label>  
                             <div class="col-md-12">
-                                Option B - <input id="' . $i . '2" name="' . $i . '2" placeholder="Enter option b" class="form-control input-md" type="text">
+                                Option B - <input id="' . $i . '2" name="' . $i . '2" placeholder="Enter option b" class="form-control input-md" type="text" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="' . $i . '3"></label>  
                             <div class="col-md-12">
-                                Option C - <input id="' . $i . '3" name="' . $i . '3" placeholder="Enter option c" class="form-control input-md" type="text">
+                                Option C - <input id="' . $i . '3" name="' . $i . '3" placeholder="Enter option c" class="form-control input-md" type="text" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12 control-label" for="' . $i . '4"></label>  
                             <div class="col-md-12">
-                                Option D - <input id="' . $i . '4" name="' . $i . '4" placeholder="Enter option d" class="form-control input-md" type="text">
+                                Option D - <input id="' . $i . '4" name="' . $i . '4" placeholder="Enter option d" class="form-control input-md" type="text" required>
                             </div>
                         </div>
                         <br /><b>Correct answer</b>:<br />
@@ -195,14 +195,24 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                 $total   = $row['total'];
                 $time    = $row['time'];
                 $eid     = $row['eid'];
-                            
+                   
+                $actual_link = 'http://'.$_SERVER['HTTP_HOST'];
+
                 echo '
                     <tr>
                     <td style="vertical-align:middle">' . $title . '</td>
                     <td style="vertical-align:middle">' . $owner . '</td>
                     <td style="vertical-align:middle">' . $total . '</td>
                     <td style="vertical-align:middle">' . $time . '&nbsp;min</td>
-                    <td style="vertical-align:middle"><b><a href="quiz.php?page=quiz&eid=' . $eid . '" class="btn logb" style="color:#FFFFFF;background:#ff0000;font-size:12px;padding:5px;">&nbsp;<span><b>Take Quiz</b></span></a></b></td>
+                    <td style="vertical-align:middle">
+                        <a href="quiz.php?page=quiz&eid=' . $eid . '" class="btn btn btn-success btn-sm btn-outline-dark">Take Quiz</a>
+                        <button type="button" class="btn btn-primary btn-sm btn-outline-dark" data-container="body" data-toggle="popover" data-placement="right" title="Send this link to a friend: " data-content=" '. $actual_link .'/quiz.php?page=quiz&eid=' . $eid . ' ">
+                            Share Quiz
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm btn-outline-dark" data-container="body" data-toggle="popover" data-placement="right" title="Are You Sure?" data-content="<a href='. $actual_link .'/update.php?page=deletequiz&eid=' . $eid . '>Yes</a>" data-html="true">
+                            Delete Quiz
+                        </button>
+                    </td>
                     </tr>
                 ';
                             

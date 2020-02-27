@@ -1,5 +1,9 @@
 <?php
 include_once 'header.php';
+
+if ($_SESSION["loggedin"] || $_SESSION["loggedin"]) {
+    header("location: welcome.php?page=1");
+}
  
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
@@ -154,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <br>
 
                                 <div class="align-center">
-                                    <p>Trouble signing in instead?<br>Click <a href="#featureUnavailableModal" class="text-white" data-toggle="modal" data-target="#featureUnavailableModal"><u>here</u></a>.</p>
+                                    <p>Trouble signing in instead?<br>Click <a class="text-white" href="#" data-toggle="popover" data-trigger="focus" title="Feature Unavailable" data-content="Our engineers are still working on this feature; it will be available in the near future."><u>here</u></a>.</p>
                                 </div>
                             </form>
                         </div>

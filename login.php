@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <br>
 
                                 <div class="align-center">
-                                    <p>Having trouble logging in?<br>Click <a href="#featureUnavailableModal" class="text-white" data-toggle="modal" data-target="#featureUnavailableModal"><u>here</u></a>.</p>
+                                    <p>Having trouble logging in?<br>Click <a class="text-white" href="#" data-toggle="popover" data-trigger="focus" title="Feature Unavailable" data-content="Our engineers are still working on this feature; it will be available in the near future."><u>here</u></a>.</p>
                                 </div>
                             </form>
                         </div>

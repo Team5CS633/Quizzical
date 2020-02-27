@@ -15,9 +15,13 @@ require_once "config.php";
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="css/main.css">
 </head>
@@ -48,7 +52,7 @@ require_once "config.php";
                     <a class="nav-link text-white" href="view.php">Quizzes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="about.php">About</a>
+                    <a class="nav-link text-white" href="about.php">About Us</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
@@ -89,35 +93,13 @@ require_once "config.php";
 
     <br><br>
 
-
-    <!-- Feature Unavailable Modal -->
-    <div class="modal" id="featureUnavailableModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Feature Unavailable</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Feature Coming Soon.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-
-    <script>
-    // Creates and focuses the bootstrap modal
-        $(document).ready(function() {
-            $('#featureUnavailableModal').modal('hide')
-            $('#featureUnavailableModal').focus()
-        });
-    </script>
-    <!-- End Modal -->
+    <!-- Pop-overs -->
+    <script type="text/javascript">  
+        $(document).ready(function () {  
+            $('[data-toggle="popover"]').popover();  
+        });  
+    </script>  
+    <!-- End Pop-overs -->
 
     <!-- Register Modal and Timer -->
     <script>

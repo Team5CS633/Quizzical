@@ -19,11 +19,29 @@ if (isset($_SESSION["loggedin"])) {
         $description = $_POST['description'];
         $views   = (int)0;
         $total   = $_POST['total'];
-        $time    = $_POST['time'];
+        $time    = 5;
 
         mysqli_query($link, "INSERT INTO quiz VALUES (NULL,'$id','$owner','$name','$description','$views','$total','$time',NULL)") or die();
         
         header("location: welcome.php?page=2&step=2&eid=$id&n=$total");
+    }
+}
+
+if (isset($_SESSION["loggedin"])) {
+    if (@$_GET['page'] == 'deletequiz') {
+
+        $eid = @$_GET['eid'];
+        $row = mysqli_query($link, "SELECT FROM quiz WHERE eid='$eid'");
+        $name = $row['owner'];
+        $row2 = mysqli_query($link, "SELECT FROM questions WHERE eid='$eid' LIMIT 1");
+        $qid = $row2['qid'];
+
+        mysqli_query($link, "DELETE FROM quiz WHERE eid='$eid'");
+        mysqli_query($link, "DELETE FROM questions WHERE eid='$eid'");
+        mysqli_query($link, "DELETE FROM options WHERE qid='$qid'");
+        mysqli_query($link, "DELETE FROM answer WHERE qid='$qid'");
+        
+        header("location: welcome.php?page=3");
     }
 }
 

@@ -103,3 +103,32 @@ select option {
     color: #000;
     text-shadow: #fff;
 }
+
+/* View Quiz Page  --> below */
+
+#userstable {
+    border-collapse: collapse;
+    max-width: 800px;
+}
+
+/* Numeric */
+.sort {
+    list-style: none;
+}
+
+.sort li {
+    float: left;
+    border: 1px solid #000;
+    padding: 5px 7px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+.sort li a {
+    text-decoration: none;
+    color:black;
+}
+
+.active {
+    color: white !important;
+}

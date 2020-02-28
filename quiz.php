@@ -8,9 +8,24 @@ if (@$_GET['eid']) {
     $s          = mysqli_query($link, "SELECT * FROM quiz WHERE eid='$eid' ");
     $sQuiz      = mysqli_fetch_array($s);
     $quizName   = $sQuiz['title'];
+    $quizTime   = $sQuiz['time'] * 60000;
+    $quizCountdownTime   = $sQuiz['time'] * 60;
 
     $updatedViews = $sQuiz['views'] + 1;
     mysqli_query($link, "UPDATE quiz SET views='$updatedViews' WHERE eid='$eid' ");
+
+    echo'
+        <script>
+            // Countdown timer for quiz submission
+            var quizTimeLeft = ' . $quizCountdownTime . ';
+            var downloadTimer = setInterval(function(){
+            quizTimeLeft--;
+            document.getElementById("quiztimer").textContent = quizTimeLeft;
+            if(quizTimeLeft <= 0)
+                clearInterval(downloadTimer);
+            },1000);
+        </script>
+    ';
 
     echo '
         <div class="container-fluid">
@@ -18,6 +33,7 @@ if (@$_GET['eid']) {
             <br><br>
             
             <h1 class="text-white">' . $quizName . '</h1>
+
         </div>
         </div>
         
@@ -32,7 +48,15 @@ if (@$_GET['eid']) {
 if (@$_GET['page'] == 'quiz' && !(@$_GET['step'])) {
 
     echo '
-            <form action="quiz.php?eid=' . $eid . '" method="POST">
+            <p><button type="button" class="btn btn-info"><b>Time Limit: <span class="badge badge-light" id="quiztimer">' . $quizTime . '</span> seconds left</b></button></p>
+
+            <form id="quiz_form" action="quiz.php?eid=' . $eid . '" method="POST">
+
+            <script>
+                setTimeout(function() {
+                    $(\'#quiz_form\').submit();
+                } ,' .  $quizTime . ');
+            </script>
     ';
 
     $q     = mysqli_query($link, "SELECT * FROM questions WHERE eid='$eid' ORDER BY id ASC");
@@ -136,7 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <br>
 
-            Your score is <b>'. $score . '</b> out of <b>' . $index . '</b>!
+            Your score is <b>'. $score . '</b> out of a total of <b>' . $index . '</b>!
         </div>
     ';
 

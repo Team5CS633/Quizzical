@@ -29,6 +29,17 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="css/main.css">
+
+    <script>
+        // Countdown timer for redirect after account creation
+        var timeleft = 10;
+        var downloadTimer = setInterval(function(){
+        timeleft--;
+        document.getElementById("countdowntimer").textContent = timeleft;
+        if(timeleft <= 0)
+            clearInterval(downloadTimer);
+        },1000);
+    </script>
 </head>
 
 <?php
@@ -43,7 +54,7 @@ if (isset($_SESSION["loggedin"])) {
         $description    = mysqli_real_escape_string($link, $description);
         $views   = (int)0;
         $total   = $_POST['total'];
-        $time    = 5;
+        $time    = $_POST['time'];;
 
         mysqli_query($link, "INSERT INTO quiz (id, eid, owner, title, description, views, total, time, date) VALUES (NULL,'$id','$owner','$name','$description','$views','$total','$time',NULL)") or die();
         
@@ -66,6 +77,24 @@ if (isset($_SESSION["loggedin"])) {
         mysqli_query($link, "DELETE FROM answer WHERE qid='$qid'");
         
         header("location: welcome.php?page=3");
+    }
+}
+
+if (isset($_SESSION["loggedin"])) {
+    if (@$_GET['page'] == 'admindeletequiz') {
+
+        $eid = @$_GET['eid'];
+        $row = mysqli_query($link, "SELECT FROM quiz WHERE eid='$eid'");
+        $name = $row['owner'];
+        $row2 = mysqli_query($link, "SELECT FROM questions WHERE eid='$eid' LIMIT 1");
+        $qid = $row2['qid'];
+
+        mysqli_query($link, "DELETE FROM quiz WHERE eid='$eid'");
+        mysqli_query($link, "DELETE FROM questions WHERE eid='$eid'");
+        mysqli_query($link, "DELETE FROM options WHERE qid='$qid'");
+        mysqli_query($link, "DELETE FROM answer WHERE qid='$qid'");
+        
+        header("location: welcome.php?page=admin");
     }
 }
 

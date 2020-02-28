@@ -39,6 +39,22 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                 <p class="card-text text-center"><a class="text-white" href="#" data-toggle="popover" data-trigger="focus" title="Feature Unavailable" data-content="Our engineers are still working on this feature; it will be available in the near future."><u>Search for a Quiz</u></a></p>
                                 <p class="card-text text-center"><a class="text-white" href="#" data-toggle="popover" data-trigger="focus" title="Feature Unavailable" data-content="Our engineers are still working on this feature; it will be available in the near future."><u>Create a Group</u></a></p>
                                 <p class="card-text text-center"><a class="text-white" href="#" data-toggle="popover" data-trigger="focus" title="Feature Unavailable" data-content="Our engineers are still working on this feature; it will be available in the near future."><u>Join a Group</u></a></p>
+            ';
+
+            $userQ = mysqli_query($link, "SELECT * FROM users WHERE username='$_SESSION[username]' ") or die();
+            $user = mysqli_fetch_array($userQ);
+            $userType = $user['type'];
+
+            if ($userType == 'admin') {
+            echo '
+                                <br>
+
+                                <p class="card-text text-center">Admin Options</p>
+                                <p class="card-text text-center"><a class="text-white" href="welcome.php?page=admin"><u>Admin Quiz Tool</u></a></p>
+            ';
+            }
+
+            echo '
                             </div>
                         </div>
                     </div>
@@ -86,7 +102,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                             <div class="form-group">
                                 <label class="col-md-12 control-label" for="time"></label>  
                                     <div class="col-md-12">
-                                        <input id="time" name="time" placeholder="Time limit feature currently unavailable" class="form-control input-md" min="1" type="number" required disabled>
+                                        <input id="time" name="time" placeholder="Enter a time limit in minutes" class="form-control input-md" max="60" min="1" type="number" required>
                                     </div>
                             </div>
                             <div class="form-group">
@@ -211,6 +227,54 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                             Share Quiz
                         </button>
                         <button type="button" class="btn btn-danger btn-sm btn-outline-dark" data-container="body" data-toggle="popover" data-placement="right" title="Are You Sure?" data-content="<a href='. $actual_link .'/update.php?page=deletequiz&eid=' . $eid . '>Yes</a>&nbsp;&nbsp;&nbsp;<a href=welcome.php?page=3>No</a>" data-html="true">
+                            Delete Quiz
+                        </button>
+                    </td>
+                    </tr>
+                ';
+                            
+            }
+        }
+
+
+        if (@$_GET['page'] == 'admin') {
+    
+            $result = mysqli_query($link, "SELECT * FROM quiz ORDER BY date DESC") or die('Error');
+            
+            echo '
+                <div class="panel"><table class="table table-striped title1" style="vertical-align:middle">
+                <tr>
+                <td style="vertical-align:middle"><b>Name</b></td>
+                <td style="vertical-align:middle"><b>Created By</b></td>
+                <td style="vertical-align:middle"><b>Total Questions</b></td>
+                <td style="vertical-align:middle"><b>Time limit</b></td>
+                <td style="vertical-align:middle"><b>Action</b></td>
+                </tr>
+            ';
+            
+            $c = 1;
+            
+            while ($row = mysqli_fetch_array($result)) {
+                $title   = $row['title'];
+                $owner   = $row['owner'];
+                $total   = $row['total'];
+                $time    = $row['time'];
+                $eid     = $row['eid'];
+                   
+                $actual_link = 'http://'.$_SERVER['HTTP_HOST'];
+
+                echo '
+                    <tr>
+                    <td style="vertical-align:middle">' . $title . '</td>
+                    <td style="vertical-align:middle">' . $owner . '</td>
+                    <td style="vertical-align:middle">' . $total . '</td>
+                    <td style="vertical-align:middle">' . $time . '&nbsp;min</td>
+                    <td style="vertical-align:middle">
+                        <a href="quiz.php?page=quiz&eid=' . $eid . '" class="btn btn btn-success btn-sm btn-outline-dark">Take Quiz</a>
+                        <button type="button" class="btn btn-primary btn-sm btn-outline-dark" data-container="body" data-toggle="popover" data-placement="right" title="Send this link to a friend: " data-content=" '. $actual_link .'/quiz.php?page=quiz&eid=' . $eid . ' ">
+                            Share Quiz
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm btn-outline-dark" data-container="body" data-toggle="popover" data-placement="right" title="Are You Sure?" data-content="<a href='. $actual_link .'/update.php?page=admindeletequiz&eid=' . $eid . '>Yes</a>&nbsp;&nbsp;&nbsp;<a href=welcome.php?page=admin>No</a>" data-html="true">
                             Delete Quiz
                         </button>
                     </td>

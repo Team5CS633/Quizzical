@@ -5,7 +5,8 @@ include_once 'header.php';
     <div class="container-fluid">
     <div class="jumbotron text-center">
         <h1 class="display-2 text-white"><b>Quizzical</b></h1>
-        <p class="text-black"><b>open platform web-based tool to allow users to learn through the ability to create and take quizzes</b></p>
+        <p class="text-black"><b>Open platform web-based tool to allow users to learn through the ability to create and take quizzes</b></p>
+        <p class="text-black"><b>Mission: "Quizzical, Let's Create, Share, and Learn Together"</b></p>
         <p><a href="register.php" class="btn btn-success btn-lg btn-outline-dark">Sign Up Today</a></p>
     </div>
 

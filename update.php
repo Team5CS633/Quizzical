@@ -9,7 +9,29 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("location: index.php");
     exit;
 }
+?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quizzical</title>
+    <!-- Bootstrap CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<?php
 if (isset($_SESSION["loggedin"])) {
     if (@$_GET['page'] == 'addquiz') {
         $id      = uniqid();
@@ -103,7 +125,27 @@ if (isset($_SESSION['loggedin'])) {
             $qans = mysqli_query($link, "INSERT INTO answer (id, qid, ansid) VALUES (NULL,'$qid','$ansid')");
 
         }
-        header("location:welcome.php?page=1");
-    }
+
+        echo '
+            <div class="quizSuccessfulModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Quiz</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Quiz Creation Successful.</p>
+                            <p>Redirecting back to the dashboard in <span id="countdowntimer">10</span> seconds. Otherwise, click <a href="welcome.php?page=1">here</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ';
+
+        echo '
+            <meta http-equiv="refresh" content="10;url=welcome.php?page=1" />
+        ';
+
+        }
 }
 ?>

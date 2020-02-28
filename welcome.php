@@ -37,6 +37,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                                 <p class="card-text text-center"><a class="text-white" href="welcome.php?page=2"><u>Create a Quiz</u></a></p>
                                 <p class="card-text text-center"><a class="text-white" href="welcome.php?page=3"><u>Take/Share/Delete your Quizzes</u></a></p>
                                 <p class="card-text text-center"><a class="text-white" href="#" data-toggle="popover" data-trigger="focus" title="Feature Unavailable" data-content="Our engineers are still working on this feature; it will be available in the near future."><u>Search for a Quiz</u></a></p>
+                                <p class="card-text text-center"><a class="text-white" href="#" data-toggle="popover" data-trigger="focus" title="Feature Unavailable" data-content="Our engineers are still working on this feature; it will be available in the near future."><u>Create a Group</u></a></p>
                                 <p class="card-text text-center"><a class="text-white" href="#" data-toggle="popover" data-trigger="focus" title="Feature Unavailable" data-content="Our engineers are still working on this feature; it will be available in the near future."><u>Join a Group</u></a></p>
                             </div>
                         </div>
@@ -79,7 +80,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                             <div class="form-group">
                                 <label class="col-md-12 control-label" for="total"></label>  
                                 <div class="col-md-12">
-                                    <input id="total" name="total" placeholder="Enter total number of questions" class="form-control input-md" type="number" max="10" min="1" required>
+                                    <input id="total" name="total" placeholder="Enter total number of questions" class="form-control input-md" type="number" max="50" min="1" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -209,7 +210,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
                         <button type="button" class="btn btn-primary btn-sm btn-outline-dark" data-container="body" data-toggle="popover" data-placement="right" title="Send this link to a friend: " data-content=" '. $actual_link .'/quiz.php?page=quiz&eid=' . $eid . ' ">
                             Share Quiz
                         </button>
-                        <button type="button" class="btn btn-danger btn-sm btn-outline-dark" data-container="body" data-toggle="popover" data-placement="right" title="Are You Sure?" data-content="<a href='. $actual_link .'/update.php?page=deletequiz&eid=' . $eid . '>Yes</a>" data-html="true">
+                        <button type="button" class="btn btn-danger btn-sm btn-outline-dark" data-container="body" data-toggle="popover" data-placement="right" title="Are You Sure?" data-content="<a href='. $actual_link .'/update.php?page=deletequiz&eid=' . $eid . '>Yes</a>&nbsp;&nbsp;&nbsp;<a href=welcome.php?page=3>No</a>" data-html="true">
                             Delete Quiz
                         </button>
                     </td>

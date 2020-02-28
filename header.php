@@ -43,6 +43,9 @@ require_once "config.php";
                 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
                     echo'
                         <li class="nav-item">
+                            <a class="nav-link text-white" href="index.php">Home</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-white" href="welcome.php?page=1">Dashboard</a>
                         </li>
                     ';
@@ -103,10 +106,16 @@ require_once "config.php";
 
     <!-- Register Modal and Timer -->
     <script>
-        // Creates and focuses the bootstrap modal
+        // Creates and focuses the register bootstrap modal
         $(document).ready(function() {
             $("#accountSuccessfulModal").modal('show');
             $('#accountSuccessfulModal').focus()
+        });
+
+        // Creates and focuses the quiz creation bootstrap modal
+        $(document).ready(function() {
+            $("#quizSuccessfulModal").modal('show');
+            $('#quizSuccessfulModal').focus()
         });
 
         // Countdown timer for redirect after account creation

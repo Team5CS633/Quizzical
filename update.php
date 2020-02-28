@@ -1,5 +1,5 @@
 <?php
-include_once 'config.php';
+include('config.php');
 
 // Initialize the session
 session_start();
@@ -16,12 +16,14 @@ if (isset($_SESSION["loggedin"])) {
         $owner   = $_SESSION["username"];
         $name    = $_POST['name'];
         $name    = ucwords(strtolower($name));
+        $name    = mysqli_real_escape_string($link, $name);
         $description = $_POST['description'];
+        $description    = mysqli_real_escape_string($link, $description);
         $views   = (int)0;
         $total   = $_POST['total'];
         $time    = 5;
 
-        mysqli_query($link, "INSERT INTO quiz VALUES (NULL,'$id','$owner','$name','$description','$views','$total','$time',NULL)") or die();
+        mysqli_query($link, "INSERT INTO quiz (id, eid, owner, title, description, views, total, time, date) VALUES (NULL,'$id','$owner','$name','$description','$views','$total','$time',NULL)") or die();
         
         header("location: welcome.php?page=2&step=2&eid=$id&n=$total");
     }
@@ -54,19 +56,27 @@ if (isset($_SESSION['loggedin'])) {
         for ($i = 1; $i <= $n; $i++) {
             $qid  = uniqid();
             $qns  = addslashes($_POST['qns' . $i]);
-            $q3   = mysqli_query($link, "INSERT INTO questions VALUES (NULL,'$eid','$qid','$qns','$ch','$i')") or die();
+
+            $q3   = mysqli_query($link, "INSERT INTO questions (id, eid, qid, qns, choice, sn) VALUES (NULL,'$eid','$qid','$qns','$ch','$i')") or die();
+
             $oaid = uniqid();
             $obid = uniqid();
             $ocid = uniqid();
             $odid = uniqid();
             $a    = addslashes($_POST[$i . '1']);
+            $a    = mysqli_real_escape_string($link, $a);
             $b    = addslashes($_POST[$i . '2']);
+            $b    = mysqli_real_escape_string($link, $b);
             $c    = addslashes($_POST[$i . '3']);
+            $c    = mysqli_real_escape_string($link, $c);
             $d    = addslashes($_POST[$i . '4']);
-            $qa = mysqli_query($link, "INSERT INTO options VALUES (NULL,'$qid','$a','$oaid')") or die('Error61');
-            $qb = mysqli_query($link, "INSERT INTO options VALUES (NULL,'$qid','$b','$obid')") or die('Error62');
-            $qb = mysqli_query($link, "INSERT INTO options VALUES (NULL,'$qid','$c','$ocid')") or die('Error63'.mysqli_error($link));
-            $qd = mysqli_query($link, "INSERT INTO options VALUES (NULL,'$qid','$d','$odid')") or die('Error64');
+            $d    = mysqli_real_escape_string($link, $d);
+
+            $qa = mysqli_query($link, "INSERT INTO options (id, qid, option, optionid) VALUES (NULL,'$qid','$a','$oaid')") or die('Error61');
+            $qb = mysqli_query($link, "INSERT INTO options (id, qid, option, optionid) VALUES (NULL,'$qid','$b','$obid')") or die('Error62');
+            $qb = mysqli_query($link, "INSERT INTO options (id, qid, option, optionid) VALUES (NULL,'$qid','$c','$ocid')") or die('Error63'.mysqli_error($link));
+            $qd = mysqli_query($link, "INSERT INTO options (id, qid, option, optionid) VALUES (NULL,'$qid','$d','$odid')") or die('Error64');
+
             $e = $_POST['ans' . $i];
 
             switch ($e) {
@@ -90,7 +100,7 @@ if (isset($_SESSION['loggedin'])) {
                     $ansid = $oaid;
             }
             
-            $qans = mysqli_query($link, "INSERT INTO answer VALUES(NULL,'$qid','$ansid')");
+            $qans = mysqli_query($link, "INSERT INTO answer (id, qid, ansid) VALUES (NULL,'$qid','$ansid')");
 
         }
         header("location:welcome.php?page=1");

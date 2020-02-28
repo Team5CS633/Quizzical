@@ -35,7 +35,7 @@ if (@$_GET['page'] == 'quiz' && !(@$_GET['step'])) {
             <form action="quiz.php?eid=' . $eid . '" method="POST">
     ';
 
-    $q     = mysqli_query($link, "SELECT * FROM questions WHERE eid='$eid' ");
+    $q     = mysqli_query($link, "SELECT * FROM questions WHERE eid='$eid' ORDER BY id ASC");
 
     $radioCounter = 1;
 
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $index = 0;
 
     /* select correct answers from db */
-    $questions = mysqli_query($link, "SELECT * FROM questions WHERE eid='$eid' ");
+    $questions = mysqli_query($link, "SELECT * FROM questions WHERE eid='$eid' ORDER BY id ASC");
 
     /* populate the answers array */
     while ( $rs = mysqli_fetch_array($questions) ) {
